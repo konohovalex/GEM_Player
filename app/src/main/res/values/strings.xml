@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE
+    resources [
+    <!ENTITY select_em_all "\u0020(YOU CAN SELECT ALL BY push\'n\'hold ANY ITEM
+        AND PERFORM REVERSE ACTION BY DOING THE SAME).">
+    <!ENTITY this_action_is_non_cancelable "\nThis action is non cancelable!">
+    ]>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ButtonCase, TypographyEllipsis">
+    <string name="app_name">
+        #GEM
+    </string>
+
+
+
+    <!-- Equalizer preset names -->
+    <string-array name="equalizer_preset_names">
+        <item>OFF</item>
+    </string-array>
+
+
+
+    <!-- Help Menu topics, topics descriptions and other stuff -->
+    <string-array name="help_menu_groups">
+        <item>BUTTONS</item>
+        <item>SONG INFO</item>
+        <item>STATUS BAR WIDGET</item>
+    </string-array>
+    <!-- Default description -->
+    <string name="help_menu_default_description">
+        Select the desired item from the drop-down list on the right,
+        and tap it to show it\'s description.\n
+        To enlarge topic description, push\'n\'hold it or image above.
+    </string>
+
+    <!-- Buttons -->
+    <!-- Topics -->
+    <string-array name="help_menu_topics_buttons">
+        <!--0--> <item>IMPORTANT INFORMATION</item>
+        <!--1--> <item>Checkpoint System button</item>
+        <!--2--> <item>Equalizer Menu button</item>
+        <!--3--> <item>Exit and Back button</item>
+        <!--4--> <item>Help Menu button</item>
+        <!--5--> <item>Next song button</item>
+        <!--6--> <item>Play/pause button</item>
+        <!--7--> <item>Playlists Menu button</item>
+        <!--8--> <item>Preferences Menu button</item>
+        <!--9--> <item>Previous song button</item>
+        <!--10--> <item>Repeat button</item>
+        <!--11--> <item>Search Menu button</item>
+        <!--12--> <item>Shadow</item>
+        <!--13--> <item>Shuffle button</item>
+        <!--14--> <item>Song cover</item>
+    </string-array>
+    <!-- Descriptions -->
+    <!--0--> <string name="help_menu_buttons_important_information">
+        Any Main Menu\'s submenu can be enlarged.\n
+        To do so push\'n\'hold it\'s image either on #GEM Player Screen, or on Main Menu.\n
+        It will remains enlarged until you push \"PUSH TO DECREASE\", even if you push Exit button.
+    </string>
+    <!--1--> <string name="help_menu_checkpoint_system_button">
+        Shown only if Checkpoint System is on in Preferences Menu.\n
+        Allows you to set position, from which song will be played.\n
+        Also allows you to play currently playing song from checkpoint position by push\'n\'hold.
+    </string>
+    <!--2--> <string name="help_menu_equalizer_menu_description">
+        Push the button, displayed above, either on #GEM Player Screen, or on Main Menu,
+        and you\'ll get into Equalizer Menu.\n
+        NOTE:\n
+        Equalizer is now unavailable, but will be added soon.
+    </string>
+    <!--3--> <string name="help_menu_main_menu_exit_and_back_button_description">
+        Has several actions, in depends on where you are in Main Menu:\n
+        1. Hide Main Menu (if you are everywhere except non-first levels of Playlists Menu);\n
+        2. Back navigation.\n
+        If you are in Playlists Menu, and Exit button has background
+        (like one under #GEM Player Screen),
+        you can push\'n\'hold it to get straight to first level of Playlists Menu.\n
+        Your UI Back button also has all Exit button functionality (except push\'n\'hold).
+    </string>
+    <!--4--> <string name="help_menu_help_menu_description">
+        Push the button, displayed above, either on #GEM Player Screen, or on Main Menu,
+        and you\'ll get into Help Menu, where you at now.\n
+        Select the desired item from the drop-down list on the right,
+        and tap it to show it\'s description.\n
+        To enlarge topic description, push\'n\'hold it or image above.
+    </string>
+    <!--5--> <string name="help_menu_next_song_button_description">
+        Just regular next song button.\n
+        If repeat mode is not Repeat All, while reaching last song of CURRENT PLAYLIST,
+        push this button twice to play first CURRENT PLAYLIST song
+        (if after first push you pushed Previous button,
+        you\'ll again need twice push to perform this action).
+    </string>
+    <!--6--> <string name="help_menu_play_pause_button_description">
+        Just regular play/pause button.
+    </string>
+    <!--7--> <string name="help_menu_playlists_menu_description">
+        Push the button, displayed above, either on #GEM Player Screen, or on Main Menu,
+        and you\'ll get into Playlists Menu.\n
+        It has 6 main options:\n
+        1. CURRENT PLAYLIST;\n
+        2. ALL SONGS;\n
+        3. ALL ARTISTS;\n
+        4. ALL ALBUMS;\n
+        5. ALL GENRES;\n
+        6. USER PLAYLISTS.\n\n
+        To add new User Playlist, being in USER PLAYLISTS,
+        tap ADD NEW USER PLAYLIST and follow the instructions.\n
+        To add new songs to your User Playlist, you can do one of following:\n
+        a) tap ADD NEW SONGS TO PLAYLIST, being in it;\n
+        b) tap\'n\'hold anything, being not in USER PLAYLISTS, then follow the instructions.\n
+        To delete songs from your User Playlist,
+        tap\'n\'hold any song, being in User Playlist and follow the instructions.\n
+        To merge some of your User Playlist to a new one,
+        tap MERGE USER PLAYLISTS and follow the instructions.\n\n
+        If there is \"!\" sign at left of song description in Playlists Menu -
+        this song were removed\n\n
+        The text line below Menu buttons shows you where you at in Playlists Menu or
+        what\'s your CURRENT PLAYLIST after you play some song or some other important information,
+        such as instructions of User Playlist songs addition. It may have Text Ticker Effect.
+    </string>
+    <!--8--> <string name="help_menu_preferences_description">
+        Push the button, displayed above, either on #GEM Player Screen, or on Main Menu,
+        and you\'ll get into Preferences Menu, where you can change #GEM preferences:\n
+        1. #GEM theme;\n
+        2. Additional Info Line mode;\n
+        3. Necessity of showing songs rescan request on each start
+        (and also there is button to manually do a songs rescan,
+        for example, if you added or removed some songs during or before #GEM session);\n
+        4. Necessity of showing song details and playback controls on Main Menu;\n
+        5. Necessity of disabling Text Ticker Effect manually;\n
+        6. Checkpoint System state;\n
+        7. Amount of non-repetitive songs while shuffling.\n
+        NOTE:\n
+        When setting amount of non-repetitive songs while shuffling,
+        remember, that if it\'s greater, than your CURRENT PLAYLIST size, than they will be equal,
+        and if equals 0, then songs will be played totally random.
+    </string>
+    <!--9--> <string name="help_menu_previous_song_button_description">
+        Just regular previous song button.\n
+        If repeat mode is not Repeat All, while reaching first song of CURRENT PLAYLIST,
+        push this button twice to play last CURRENT PLAYLIST song
+        (if after first push you pushed Next button,
+        you\'ll again need twice push to perform this action).\n
+        To play song from start, even if Checkpoint System is on, push\'n\'hold it.
+    </string>
+    <!--10--> <string name="help_menu_repeat_button_description">
+        Just regular repeat songs button.\n
+        As displayed above (clockwise): No repeat -> Repeat song -> Repeat all songs.
+    </string>
+    <!--11--> <string name="help_menu_search_button_description">
+        Push the button, displayed above, either on #GEM Player Screen, or on Main Menu,
+        and you\'ll get into Search Menu.\n
+        If song, artist, album or genre description contains you input anywhere inside it
+        (even if it is just one digit or symbol), it will be added to search results.\n
+        All search results are grouped by 4 categories:\n
+        1. songs found in ALL SONGS;\n
+        2. artists found in ALL ARTISTS,\n
+        3. albums found in ALL ALBUMS,\n
+        4. genres found in ALL GENRES (each contains all it\'s songs).\n
+        To play any song tap it\'s description.
+    </string>
+    <!--12--> <string name="help_menu_shadow_description">
+        You can see shadow around Main Menu, that allows you to quick exit Main Menu without losing
+        your actions here, just tap it and go wherever you were before after that
+        (for example, if you were at [some artist - ALL SONGS],
+        after pushing shadow, push Playlists Menu button and you\'ll get right there).
+    </string>
+    <!--13--> <string name="help_menu_shuffle_button_description">
+        Just regular shuffle songs button.\n
+        As displayed above: Off -> On.\n
+        The amount of guaranteed non-repetitive songs can be set in Preferences Menu.
+    </string>
+    <!--14--> <string name="help_menu_song_cover_description">
+        Displays your current song\'s cover on #GEM Player Screen, if any.\n
+        To show large version, tap it, then tap either enlarged version,
+        or Shadow around to exit.
+    </string>
+
+    <!-- Song info -->
+    <!-- Topics -->
+    <string-array name="help_menu_topics_song_info">
+        <item>Additional Info Line</item>
+        <item>Song details</item>
+    </string-array>
+    <!-- Descriptions -->
+    <string name="help_menu_additional_info_line_description">
+        #GEM Player Screen has Additional Info Line under Preferences Menu button.\n
+        It can show you one of the following:
+        1. current Equalizer preset;\n
+        2. CURRENT PLAYLIST name;\n
+        3. currently playing song genre;\n
+        4. currently playing song lyrics (if any).\n
+        You can select, what to show in Preferences Menu.
+    </string>
+    <string name="help_menu_song_details_description">
+        Song details lines contains currently playing song\'s (left-to-right-top-to-bottom):\n
+        1. artist (displayed only if any);\n
+        2. order in CURRENT PLAYLIST;\n
+        3. album (displayed only if any, with year, if any);\n
+        4. playback time elapsed;
+        5. duration;
+        6. checkpoint position (shown only if Checkpoint System is on);
+        7. title (with song order in album, if any).\n
+        If text in line is too long, you can tap it to add a Text Ticker Effect,
+        then tap it once again or switch song or surf through or exit Main Menu
+        to deactivate this function
+        (note, that you can deactivate automatically Text Ticker Effect disabling
+        being in Preferences Menu, thus it will be active even if you tap text,
+        that isn\'t too long to be truncated (that case effect will be invisible)
+        and won\'t disappear until you switch it off by tap).
+    </string>
+
+    <!-- Widget -->
+    <!-- Topics -->
+    <string-array name="help_menu_topics_widget_elements">
+        <item>Functionality</item>
+    </string-array>
+    <!-- Descriptions -->
+    <string name="help_menu_status_bar_widget_description">
+        Every time you play/pause a song, #GEM status bar widget appears or updates.\n
+        It contains some of playback controls to get easy access to playback outside the #GEM app.\n
+        You can open #GEM window by tap it.\n
+        If widget not appears completely, just push colored #GEM icon to expand it.\n
+        To close it swipe it left or right
+        (it also disappears automatically, when #GEM cannot play song).
+    </string>
+
+
+
+    <!-- Playlists Menu strings -->
+    <string name="current_equalizer_preset">
+        CURRENT EQUALIZER PRESET:\n%1$s
+    </string>
+    <string name="current_playlist">
+        CURRENT PLAYLIST:\n%1$s
+    </string>
+    <string name="currently_playing_song_genre">
+        CURRENTLY PLAYING TRACK GENRE:\n%1$s
+    </string>
+    <string name="no_lyrics_available">
+        NO LYRICS AVAILABLE
+    </string>
+    <string name="all_songs_by_artist">
+        ALL SONGS BY %1$s
+    </string>
+    <string name="all_albums_by_artist">
+        ALL ALBUMS BY %1$s
+    </string>
+    <string name="all_specific_genre_songs">
+        ALL %1$s SONGS
+    </string>
+    <string name="add_new_user_playlist">
+        ADD NEW USER PLAYLIST
+    </string>
+    <string name="merge_user_playlists">
+        MERGE USER PLAYLISTS
+    </string>
+    <string name="add_new_songs_to_user_playlist">
+        ADD NEW SONGS TO PLAYLIST
+    </string>
+    <string name="add_new_user_playlist_alert_dialog_hint">
+        Please, name your new playlist:
+    </string>
+
+    <!-- Playlists options names -->
+    <string-array name="playlists_options_names">
+        <item>CURRENT PLAYLIST</item>
+        <item>ALL SONGS</item>
+        <item>ALL ARTISTS</item>
+        <item>ALL ALBUMS</item>
+        <item>ALL GENRES</item>
+        <item>USER PLAYLISTS</item>
+    </string-array>
+
+    <!-- additional_info_line texts (for songs addition or deletion) -->
+    <string name="confirm_songs_text">
+        SELECT SONGS TO ADD TO: %1$s&select_em_all;
+    </string>
+    <string name="delete_songs_text">
+        SELECT SONGS TO DELETE FROM: %1$s&select_em_all;
+    </string>
+    <string name="select_what_to_add_text">
+        SELECT, WHAT TO ADD TO YOUR USER PLAYLISTS.
+    </string>
+    <string name="select_where_to_add_text">
+        SELECT USER PLAYLISTS TO ADD PREVIOUSLY CHOSEN ITEMS TO&select_em_all;
+    </string>
+    <string name="merge_selection_text">
+        CHOOSE PLAYLISTS, YOU WANT TO BASE YOUR NEW PLAYLIST ON.
+    </string>
+
+
+
+    <!-- Preferences menu strings -->
+    <string name="ask_for_change_theme">
+        Tap image to change #GEM theme
+    </string>
+    <string name="ask_for_change_additional_info_line_option">
+        Tap image to change, what to show as Additional Info Line
+    </string>
+    <string name="ask_for_showing_songs_rescan_on_start_request">
+        Show songs rescan request on each start?
+    </string>
+    <string name="ask_for_showing_song_details_on_main_menu">
+        Show song details on Main Menu?
+    </string>
+    <string name="ask_for_text_ticker_effect_manually_disabling">
+        Disable Text Ticker Effect manually?
+    </string>
+    <string name="ask_for_showing_playback_contols_on_main_menu">
+        Show playback controls on Main Menu?
+    </string>
+    <string name="ask_for_activating_checkpoint_system">
+        Enable Checkpoint System?
+    </string>
+    <string name="ask_for_change_of_amount_of_gnr_songs">
+        Input the amount of guaranteed non-repetitive songs, while shuffling (0-250),
+        and push Enter
+    </string>
+
+    <!-- Preferences menu header texts -->
+    <string name="preferences_menu_header_text_themes">
+        CHOOSE #GEM THEME</string>
+    <string name="preferences_menu_header_text_additional_info_line_options">
+        CHOOSE ADDITIONAL INFO LINE OPTION</string>
+
+    <!-- Theme names -->
+    <string-array name="theme_names">
+        <!--0--><item>AMETHYST</item>
+        <!--1--><item>BLACK DIAMOND</item>
+        <!--2--><item>CITRINE</item>
+        <!--3--><item>EMERALD</item>
+        <!--4--><item>FIRE OPAL</item>
+        <!--5--><item>RUBY</item>
+        <!--6--><item>SAPPHIRE</item>
+        <!--7--><item>TOPAZ</item>
+    </string-array>
+
+    <!-- Image names -->
+    <!--tbd - rearrange-->
+    <string-array name="image_names">
+        <!--0--><item>equalizer_button</item>
+        <!--1--><item>equalizer_button_toggled</item>
+        <!--2--><item>help_button</item>
+        <!--3--><item>help_button_toggled</item>
+        <!--4--><item>playlists_button</item>
+        <!--5--><item>playlists_button_toggled</item>
+        <!--6--><item>previous_song_button</item>
+        <!--7--><item>play_button</item>
+        <!--8--><item>pause_button</item>
+        <!--9--><item>next_song_button</item>
+        <!--10--><item>straight_button</item>
+        <!--11--><item>shuffle_button</item>
+        <!--12--><item>search_button</item>
+        <!--13--><item>search_button_toggled</item>
+        <!--14--><item>exit_and_back_button</item>
+        <!--15--><item>exit_and_back_button_toggled</item>
+        <!--16--><item>no_repeat_button</item>
+        <!--17--><item>repeat_one_button</item>
+        <!--18--><item>repeat_all_button</item>
+        <!--19--><item>confirm_button</item>
+        <!--20--><item>show_all_themes_button</item>
+        <!--21--><item>background</item>
+        <!--22--><item>song_lyrics_icon</item>
+        <!--23--><item>empty_circle</item>
+        <!--24--><item>additional_button</item>
+        <!--25--><item>checkpoint_system_button</item>
+        <!--26--><item>help_menu_repeat_buttons</item>
+        <!--27--><item>help_menu_shuffle_buttons</item>
+    </string-array>
+
+    <!-- additional_info_line_options names -->
+    <string-array name="additional_info_line_options_texts">
+        <item>Current equalizer preset
+            (swipe left-right to change, push\'n\'hold to turn off)</item>
+        <item>CURRENT PLAYLIST name (can be enlarged by push\'n\'hold)</item>
+        <item>Currently playing song genre (if present; can be enlarged by push\'n\'hold)</item>
+        <item>Currently playing song lyrics (if present; can be enlarged by push\'n\'hold)</item>
+    </string-array>
+
+
+
+    <!-- Search menu string -->
+    <string name="search_menu_search_field_hint">
+        What to search?
+    </string>
+
+    <!-- Search Menu categories -->
+    <string name="found_songs">
+        FOUND SONGS
+    </string>
+    <string name="found_artists">
+        FOUND ARTISTS
+    </string>
+    <string name="found_albums">
+        FOUND ALBUMS
+    </string>
+    <string name="found_genres">
+        FOUND GENRES
+    </string>
+
+
+
+    <!-- Audio rescan request text -->
+    <string name="request_audio_rescan">
+        Do you wish to rescan your device for songs (it may take some time)?\n
+        Strongly recommended, if you had added or removed songs from device (otherwise newly
+        added songs won\'t be shown.
+        However, deleted songs will still present in playlists, but cannot be played:
+        this dialog will be repeated instead of it).
+    </string>
+    <string name="can_be_disabled_in_preferences">
+        \n\nNOTE:\nYou can disable songs rescan request on each start anytime in Preferences Menu,
+        or by disabling "Show always?" below.
+    </string>
+    <string name="songs_rescan_button_text">
+        Push to rescan songs
+    </string>
+
+
+
+    <!-- decrease_button_text -->
+    <string name="decrease_button_text">
+        PUSH TO DECREASE
+    </string>
+
+
+
+    <!-- Loading screen text -->
+    <string name="please_wait_until_songs_library_created">
+        PLEASE, WAIT UNTIL SONGS LIBRARY CREATED...</string>
+    <string name="please_wait_until_songs_library_updated">
+        PLEASE, WAIT UNTIL SONGS LIBRARY UPDATED...</string>
+    <string name="please_wait_theme_application">PLEASE, WAIT UNTIL THEME APPLIED...</string>
+    <string name="please_wait_songs_addition">PLEASE, WAIT UNTIL SONGS ADDED...</string>
+    <string name="please_wait_songs_deletion">PLEASE, WAIT UNTIL SONGS DELETED...</string>
+    <string name="please_wait_user_playlist_deletion">
+        PLEASE, WAIT UNTIL USER PLAYLIST DELETED...</string>
+    <string name="please_wait_user_playlists_merge">
+        PLEASE, WAIT UNTIL USER PLAYLIST MERGED...</string>
+
+
+
+    <!-- Null time, one for all -->
+    <string name="null_time">00:00:00</string>
+
+
+
+    <!-- Texts for customToast and customDialog buttons -->
+    <string name="custom_toast_close_button_text">GOT IT!</string>
+    <string name="custom_dialog_songs_rescan_request_on_start_check_text">Show always?</string>
+    <string name="custom_dialog_cancel_button_text">CANCEL</string>
+    <string name="custom_dialog_confirm_button_text">GO!</string>
+
+    <!-- Confirmation texts -->
+    <string name="add_new_user_playlist_confirm_song_selection_text">
+        Are you sure, that you have chosen all songs, you want to add to your new User Playlist?\n
+        Note, that you can add any song later, surfing through Playlists Menu,
+        or remove it, being in your User Playlist.
+    </string>
+    <string name="delete_user_playlist_confirmation_text">
+        Do you want to delete User Playlist: %1$s\?&this_action_is_non_cancelable;
+    </string>
+    <string name="delete_songs_from_user_playlist_long_click_text">
+        If you want to delete some songs from User Playlist: %1$s,
+        push GO!, then select songs to delete (long tap any to select \'em all)
+        and push CONFIRM button.
+    </string>
+    <string name="delete_songs_from_user_playlist_confirmation_text">
+        Are you sure, that you want to delete all selected songs from User Playlist: %1$s\?
+        &this_action_is_non_cancelable;
+    </string>
+    <string name="add_wish_1">
+        Do you want to add something to some of your User Playlists?\n
+        Push GO!, choose, what you want to add, and push CONFIRM button.
+    </string>
+    <string name="add_wish_2">
+        Do you want to add all\n%1$s\nsongs to some of your User Playlists?\n
+        Push GO!, choose playlists to add to, and push CONFIRM button.
+    </string>
+    <string name="items_addition_confirmation">
+        Are you sure, that you have chosen all items, you want to add?\n
+        If yes - push GO!, then choose your User Playlists to add items to
+        and push CONFIRM button.
+    </string>
+    <string name="user_playlists_to_add_to_confirmation">
+        Are you sure, that you have chosen all User playists,
+        you want to add previously chosen items to?\n
+        If yes - push GO! and, please, wait \'til addition process finishes.
+    </string>
+    <string name="go_to_user_playlists_confirmation">
+        Songs addition procedure completed successfully.\n
+        To go to USER PLAYLISTS push "GO!",
+        to get back to where you were before starting procedure, push "CANCEL".
+    </string>
+    <string name="play_song_from_search_results">
+        Switch CURRENT PLAYLIST to \n%1$s\n and play it from\n%2$s?
+    </string>
+    <string name="merge_question_text">
+        Do you wish to create new User Playlist, based on one or more another?\n
+        If yes, input new one\'s name (it will be created only at the end of process), push GO!,
+        then choose, what playlists you wish to merge and push CONFIRM\n
+    </string>
+    <string name="merge_confirmation_text">
+        Are you sure, that you have chosen all User Playlists you wish to merge?
+    </string>
+
+    <!-- Usage instructions coarse texts array -->
+    <string-array name="usage_guide">
+        <item>Thank you for installing #GEM, so let\'s begin your first #GEM session!\n
+            First time you push almost every button on Player Screen,
+            you\'ll see it\'s functionality description.\n</item>
+        <item></item>
+    </string-array>
+</resources>

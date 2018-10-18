@@ -1,0 +1,1693 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GemPlayer"
+    tools:ignore="ContentDescription,LabelFor,TooManyViews,UselessParent,NestedWeights,">
+
+    <!-- Player screen -->
+    <LinearLayout
+        android:id="@+id/player_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:orientation="vertical">
+
+        <!-- Top layout -->
+        <!-- Contains 6 elements in 2 rows:
+        0) "Equalizer button"
+        1) "Help button"
+        2) "Preferences button"
+        0) "Small cover button"
+        1) "Playlists button"
+        2) "Current playlist name" -->
+        <LinearLayout
+            android:id="@+id/player_top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- 1st row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Equalizer button -->
+                <ImageButton
+                    android:id="@+id/player_screen_equalizer_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="toggleEqualizerMenu"
+                    android:padding="16dp"
+                    android:scaleType="fitCenter"
+                    android:scaleX="-1"
+                    android:visibility="visible" />
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Help button -->
+                <ImageButton
+                    android:id="@+id/player_screen_help_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="toggleHelpMenu"
+                    android:padding="24dp"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible" />
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Preferences button -->
+                <ImageButton
+                    android:id="@+id/player_screen_preferences_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="togglePreferencesMenu"
+                    android:padding="16dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/preferences_button"
+                    android:visibility="visible" />
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+            </LinearLayout>
+
+            <!-- 2nd row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Small cover button -->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/cover_button_small"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:alpha="1"
+                        android:onClick="showEnlargedCover"
+                        android:scaleType="fitCenter"
+                        android:visibility="visible" />
+                </RelativeLayout>
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Playlists button -->
+                <ImageButton
+                    android:id="@+id/player_screen_playlists_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="togglePlaylistsMenu"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible" />
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Displays additional song info -->
+                <ScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scrollbars="none">
+
+                    <TextView
+                        android:id="@+id/player_screen_additional_info_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="sans-serif-condensed"
+                        android:singleLine="false"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+                </ScrollView>
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Middle layout -->
+        <!-- Contains tree TextViews for current song details:
+        artist / album / title
+        and song scrolling widget -->
+        <LinearLayout
+            android:id="@+id/player_middle_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Artist, order and album -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <!-- Artist -->
+                <TextView
+                    android:id="@+id/current_song_artist_player"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="10"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:onClick="addTickerEffectToText"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+                <!-- Order of track in playlist -->
+                <TextView
+                    android:id="@+id/current_song_order_player"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="4"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:onClick="addTickerEffectToText"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:visibility="visible" />
+                <!-- Album -->
+                <TextView
+                    android:id="@+id/current_song_album_player"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="10"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:onClick="addTickerEffectToText"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Timer and Checkpoint System button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <!-- Timer in format "hh:mm:ss" -->
+                <TextView
+                    android:id="@+id/timer"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:onClick="addTickerEffectToText"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:visibility="visible" />
+                <!-- Divider -->
+                <TextView
+                    android:id="@+id/timer_divider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="/"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:visibility="visible" />
+                <!-- currentlyPlayingSong's getDuration() in format "/ hh:mm:ss"  -->
+                <TextView
+                    android:id="@+id/currently_playing_song_duration_view"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:onClick="addTickerEffectToText"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:visibility="visible" />
+                <!-- currentlyPlayingSong's getDuration() in format "/ hh:mm:ss"  -->
+                <TextView
+                    android:id="@+id/currently_playing_song_checkpoint_time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:onClick="addTickerEffectToText"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+                <!-- Seekbar checkpoint system button -->
+                <ImageButton
+                    android:id="@+id/checkpoint_system_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="setCheckPoint"
+                    android:scaleType="fitCenter"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Scrolling widget -->
+            <rm.com.audiowave.AudioWaveView
+                android:id="@+id/seekbar"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="2"
+                app:chunkHeight="48dp"
+                app:chunkRadius="1dp"
+                app:chunkSpacing="1dp"
+                app:chunkWidth="2dp"
+                app:minChunkHeight="2dp" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/current_song_title_player"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:onClick="addTickerEffectToText"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <!-- Bottom layout -->
+        <!-- Contains 6 buttons in 2 rows:
+            1st row (hides on each pop-up call):
+        0) "Previous song button"
+        1) "Play/pause song button"
+        2) "Next song button"
+            2nd row:
+        0) "Shuffle button"
+        1) "Search button"
+        2) "Repeat/repeat all" button -->
+        <LinearLayout
+            android:id="@+id/player_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- 1st row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Previous song button  -->
+                <ImageButton
+                    android:id="@+id/player_screen_previous_song_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="playPreviousSong"
+                    android:padding="16dp"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible" />
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Play/pause song button -->
+                <ImageButton
+                    android:id="@+id/player_screen_play_pause_song_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:elevation="0dp"
+                    android:onClick="onPlayPauseClick"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible" />
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Next song button -->
+                <ImageButton
+                    android:id="@+id/player_screen_next_song_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="playNextSong"
+                    android:padding="16dp"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible" />
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+            </LinearLayout>
+
+            <!-- 2nd row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Shuffle button -->
+                <ImageButton
+                    android:id="@+id/player_screen_shuffle_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="onShuffleButtonClick"
+                    android:padding="20dp"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible" />
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Search button -->
+                <ImageButton
+                    android:id="@+id/player_screen_search_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="toggleSearchMenu"
+                    android:padding="24dp"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible" />
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <!-- Repeat/repeat all button -->
+                <ImageButton
+                    android:id="@+id/player_screen_repeat_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="onRepeatButtonClick"
+                    android:padding="20dp"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible" />
+
+                <!-- Empty space -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Pop-up menus -->
+
+    <!-- Shadow / hidden on default -->
+    <ImageView
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+
+    <!-- Enlarged cover button -->
+    <ImageButton
+        android:id="@+id/cover_button_large"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:onClick="hideEnlargedCover"
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
+
+    <!-- Main menu
+        5 filling options:
+        0) Help menu
+        1) Equalizer menu
+        2) Playlists menu
+        3) Preferences menu
+        4) Search menu
+
+        Contains 4 common rows
+        (Common buttons' images are the same as on Player screen, but smaller):
+        0) Filling option switch buttons
+        1) Current song details
+        2) Playback control buttons
+        3) Fourth row buttons -->
+    <LinearLayout
+        android:id="@+id/main_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="32dp"
+        android:alpha="0"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!-- Main menu elements -->
+        <!-- Filling options switch buttons -->
+        <LinearLayout
+            android:id="@+id/main_menu_menu_s_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="0.25"
+            android:orientation="horizontal">
+
+            <!-- Empty space -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25" />
+
+            <!-- Main menu Equalizer button -->
+            <ImageButton
+                android:id="@+id/main_menu_equalizer_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="toggleEqualizerMenu"
+                android:scaleType="fitCenter" />
+
+            <!-- Empty space -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25" />
+
+            <!-- Main menu Help button -->
+            <ImageButton
+                android:id="@+id/main_menu_help_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="toggleHelpMenu"
+                android:scaleType="fitCenter" />
+
+            <!-- Empty space -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25" />
+
+            <!-- Main menu Playlists button -->
+            <ImageButton
+                android:id="@+id/main_menu_playlists_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="togglePlaylistsMenu"
+                android:scaleType="fitCenter" />
+
+            <!-- Empty space -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25" />
+
+            <!-- Main menu Preferences button -->
+            <ImageButton
+                android:id="@+id/main_menu_preferences_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="togglePreferencesMenu"
+                android:scaleType="fitCenter"
+                android:scaleY="1"
+                android:src="@drawable/preferences_button" />
+
+            <!-- Empty space -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25" />
+
+            <!-- Main menu Search button -->
+            <ImageButton
+                android:id="@+id/main_menu_search_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="toggleSearchMenu"
+                android:scaleType="fitCenter"
+                android:scaleY="1" />
+
+            <!-- Empty space -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25" />
+        </LinearLayout>
+
+        <!-- Divider -->
+        <ImageView
+            android:id="@+id/main_menu_top_divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp" />
+
+        <!-- Filling options -->
+
+        <!-- Equalizer menu -->
+        <LinearLayout
+            android:id="@+id/equalizer_menu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- Equalizer menu top elements:
+            0) delete current preset ImageButton
+            1) current preset name TextView
+            2) add new preset button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="16dp">
+
+                <!-- Delete current preset button -->
+                <ImageButton
+                    android:id="@+id/equalizer_menu_delete_current_preset_button"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:src="@android:drawable/ic_delete" />
+
+                <!-- Equalizer current preset name -->
+                <TextView
+                    android:id="@+id/equalizer_menu_current_preset_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:onClick="addTickerEffectToText"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <!-- Add new preset button -->
+                <ImageButton
+                    android:id="@+id/equalizer_menu_add_new_preset_button"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:src="@android:drawable/ic_input_add" />
+            </LinearLayout>
+
+            <!-- Interactive equalizer -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+
+        <!-- Help menu elements -->
+        <LinearLayout
+            android:id="@+id/help_menu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:baselineAligned="false"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <!-- Described object miniature -->
+                <ImageView
+                    android:id="@+id/help_menu_image_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:padding="8dp"
+                    android:scaleType="fitCenter" />
+
+                <!-- Topic description -->
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:scrollbars="none">
+
+                    <TextView
+                        android:id="@+id/help_menu_element_description_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="sans-serif-condensed"
+                        android:singleLine="false"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+                </ScrollView>
+            </LinearLayout>
+
+            <!-- List of topics -->
+            <ExpandableListView
+                android:id="@+id/help_menu_topics"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_weight="3"
+                android:background="@android:color/transparent"
+                android:scrollbars="none" />
+        </LinearLayout>
+
+        <!-- Playlists menu -->
+        <LinearLayout
+            android:id="@+id/playlists_menu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginBottom="4dp">
+                <!-- Displays current playlist's name -->
+                <TextView
+                    android:id="@+id/playlists_menu_additional_info_line"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:onClick="addTickerEffectToText"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <!-- Confirm button -->
+                <ImageButton
+                    android:id="@+id/playlists_menu_confirm_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="0"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Divider -->
+            <ImageView
+                android:id="@+id/playlists_menu_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
+
+            <!-- Contains Playlists menu objects -->
+            <ListView
+                android:id="@+id/playlists_menu_objects"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scrollbars="none" />
+        </LinearLayout>
+
+        <!-- Preferences menu -->
+        <LinearLayout
+            android:id="@+id/preferences_menu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- Preferences menu elements -->
+            <ScrollView
+                android:id="@+id/preferences_menu_elements"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Theme change -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp">
+
+                        <TextView
+                            android:id="@+id/show_all_themes_text"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="4"
+                            android:fontFamily="sans-serif-condensed"
+                            android:gravity="center"
+                            android:singleLine="false"
+                            android:text="@string/ask_for_change_theme"
+                            android:textAlignment="center"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:id="@+id/show_all_themes_button"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:onClick="showAllThemes"
+                            android:padding="4dp"
+                            android:scaleType="fitCenter" />
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <ImageView
+                        android:id="@+id/preferences_menu_divider1"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp" />
+
+                    <!-- Change player_screen_additional_info_line options -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp">
+
+                        <TextView
+                            android:id="@+id/show_additional_info_line_options_text"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="4"
+                            android:fontFamily="sans-serif-condensed"
+                            android:gravity="center"
+                            android:singleLine="false"
+                            android:text="@string/ask_for_change_additional_info_line_option"
+                            android:textAlignment="center"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:id="@+id/show_additional_info_line_options_button"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:onClick="showAdditionalInfoLineOptions"
+                            android:padding="4dp"
+                            android:scaleType="fitCenter" />
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <ImageView
+                        android:id="@+id/preferences_menu_divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp" />
+
+                    <!-- Songs rescan button -->
+                    <Button
+                        android:id="@+id/songs_rescan_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:text="@string/songs_rescan_button_text"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                    <!-- Divider -->
+                    <ImageView
+                        android:id="@+id/preferences_menu_divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp" />
+
+                    <!-- Necessity of showing songs rescan request -->
+                    <Switch
+                        android:id="@+id/songs_rescan_request_on_start_check"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:singleLine="false"
+                        android:text="@string/ask_for_showing_songs_rescan_on_start_request"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                    <!-- Divider -->
+                    <ImageView
+                        android:id="@+id/preferences_menu_divider4"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp" />
+
+                    <!-- Necessity of showing song details on main menu -->
+                    <Switch
+                        android:id="@+id/main_menu_song_details_check"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:singleLine="false"
+                        android:text="@string/ask_for_showing_song_details_on_main_menu"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                    <!-- Divider -->
+                    <ImageView
+                        android:id="@+id/preferences_menu_divider5"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp" />
+
+                    <!-- Necessity of showing playback controls on main menu -->
+                    <Switch
+                        android:id="@+id/main_menu_playback_controls_check"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:singleLine="false"
+                        android:text="@string/ask_for_showing_playback_contols_on_main_menu"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                    <!-- Divider -->
+                    <ImageView
+                        android:id="@+id/preferences_menu_divider6"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp" />
+
+                    <!-- Necessity of manual disabling of text scrolling -->
+                    <Switch
+                        android:id="@+id/text_ticker_effect_manually_disabling_check"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:singleLine="false"
+                        android:text="@string/ask_for_text_ticker_effect_manually_disabling"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                    <!-- Divider -->
+                    <ImageView
+                        android:id="@+id/preferences_menu_divider7"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp" />
+
+                    <!-- Necessity of activating seekbar checkpoint system -->
+                    <Switch
+                        android:id="@+id/checkpoint_system_check"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:singleLine="false"
+                        android:text="@string/ask_for_activating_checkpoint_system"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                    <!-- Divider -->
+                    <ImageView
+                        android:id="@+id/preferences_menu_divider8"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp" />
+
+                    <!-- Change guaranteed non-repetitive songs amount -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp">
+
+                        <TextView
+                            android:id="@+id/gnr_amount_text"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="4"
+                            android:fontFamily="sans-serif-condensed"
+                            android:gravity="center"
+                            android:singleLine="false"
+                            android:text="@string/ask_for_change_of_amount_of_gnr_songs"
+                            android:textAlignment="center"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/gnr_amount"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-condensed"
+                            android:gravity="center"
+                            android:imeOptions="actionGo"
+                            android:inputType="number"
+                            android:textCursorDrawable="@null"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- Header -->
+            <TextView
+                android:id="@+id/preferences_menu_header"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:onClick="addTickerEffectToText"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <!-- Divider -->
+            <ImageView
+                android:id="@+id/preferences_menu_header_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:visibility="gone" />
+
+            <!-- #GEM themes -->
+            <ListView
+                android:id="@+id/gem_themes"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scrollbars="none"
+                android:visibility="gone" />
+
+            <!-- additional_info_line options -->
+            <ListView
+                android:id="@+id/additional_info_line_options"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scrollbars="none"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Search menu -->
+        <LinearLayout
+            android:id="@+id/search_menu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <!-- Search field -->
+                <EditText
+                    android:id="@+id/search_menu_search_field"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="8"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="@string/search_menu_search_field_hint"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:textCursorDrawable="@null"
+                    android:textSize="16sp" />
+
+                <!-- Confirm button -->
+                <ImageButton
+                    android:id="@+id/search_menu_confirm_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:onClick="confirm"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </LinearLayout>
+
+            <!-- Found matches -->
+            <ExpandableListView
+                android:id="@+id/search_menu_found_matches"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:nestedScrollingEnabled="true"
+                android:scrollbars="none" />
+        </LinearLayout>
+
+        <!-- Divider -->
+        <ImageView
+            android:id="@+id/main_menu_bottom_divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp" />
+
+        <!-- Song details -->
+        <LinearLayout
+            android:id="@+id/main_menu_song_details"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25">
+            <!-- Artist -->
+            <TextView
+                android:id="@+id/current_song_artist_main_menu"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_weight="3"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:onClick="addTickerEffectToText"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:visibility="gone" />
+            <!-- Title -->
+            <TextView
+                android:id="@+id/current_song_title_main_menu"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="4"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:onClick="addTickerEffectToText"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:visibility="visible" />
+            <!-- Album -->
+            <TextView
+                android:id="@+id/current_song_album_main_menu"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="3"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:onClick="addTickerEffectToText"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Main menu playback control buttons -->
+        <LinearLayout
+            android:id="@+id/main_menu_playback_controls_1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="0.25">
+
+            <!-- Empty space -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+            <!-- Main menu Previous song button -->
+            <ImageButton
+                android:id="@+id/main_menu_previous_song_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="playPreviousSong"
+                android:padding="8dp"
+                android:scaleType="fitCenter" />
+
+            <!-- Empty space -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+            <!-- Main menu Play/pause song button -->
+            <ImageButton
+                android:id="@+id/main_menu_play_pause_song_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="onPlayPauseClick"
+                android:padding="2dp"
+                android:scaleType="fitCenter" />
+
+            <!-- Empty space -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+            <!-- Main menu Next song button -->
+            <ImageButton
+                android:id="@+id/main_menu_next_song_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="playNextSong"
+                android:padding="8dp"
+                android:scaleType="fitCenter" />
+
+            <!-- Empty space -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+        </LinearLayout>
+
+        <!-- Main menu third row buttons -->
+        <LinearLayout
+            android:id="@+id/main_menu_playback_controls_2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="0.25">
+
+            <!-- Large playlist or search menu results hide button -->
+            <Button
+                android:id="@+id/main_menu_s_enlarged_submenu_decrease_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="2"
+                android:text="@string/decrease_button_text"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <!-- Empty space -->
+            <Space
+                android:id="@+id/main_menu_playback_controls_2_space_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+            <!-- Main menu Shuffle button -->
+            <ImageButton
+                android:id="@+id/main_menu_shuffle_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="onShuffleButtonClick"
+                android:padding="8dp"
+                android:scaleType="fitCenter" />
+
+            <!-- Empty space -->
+            <Space
+                android:id="@+id/main_menu_playback_controls_2_space_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+            <!-- Main menu Exit button -->
+            <ImageButton
+                android:id="@+id/main_menu_exit_and_back_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+
+            <!-- Empty space -->
+            <Space
+                android:id="@+id/main_menu_playback_controls_2_space_3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+            <!-- Main menu Repeat button -->
+            <ImageButton
+                android:id="@+id/main_menu_repeat_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="onRepeatButtonClick"
+                android:padding="8dp"
+                android:scaleType="fitCenter" />
+
+            <!-- Empty space -->
+            <Space
+                android:id="@+id/main_menu_playback_controls_2_space_4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/help_menu_element_description_large_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+        android:alpha="0"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!-- Described object miniature -->
+        <ImageView
+            android:id="@+id/help_menu_element_description_large_layout_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:padding="8dp"
+            android:scaleType="fitCenter" />
+
+        <!-- Large topic description -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:scrollbars="none">
+
+            <TextView
+                android:id="@+id/help_menu_element_description_large_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-condensed"
+                android:singleLine="false"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+        </ScrollView>
+
+        <!-- Exit button -->
+        <Button
+            android:id="@+id/help_menu_element_description_large_layout_decrease_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="@string/decrease_button_text"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Layout, contains enlarged either player_screen,
+    or playlists_menu additional_info_line text (called on their longClicks) -->
+    <LinearLayout
+        android:id="@+id/enlarged_additional_info_line_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+        android:alpha="0"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!-- additional_info_line text -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:scrollbars="none">
+
+            <TextView
+                android:id="@+id/enlarged_additional_info_line_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-condensed"
+                android:singleLine="false"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+        </ScrollView>
+
+        <!-- Exit button -->
+        <Button
+            android:id="@+id/enlarged_additional_info_line_decrease_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="@string/decrease_button_text"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Custom Dialog (just a layout, neither Toast nor Dialog class child) -->
+    <RelativeLayout
+        android:id="@+id/custom_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:visibility="gone">
+        <!-- Shadow -->
+        <ImageView
+            android:id="@+id/custom_dialog_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5" />
+        <!-- Info frame -->
+        <RelativeLayout
+            android:id="@+id/custom_dialog_frame_outer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="32dp"
+            android:onClick="screenLock"
+            android:padding="4dp">
+            <!-- Inner frame with all content -->
+            <LinearLayout
+                android:id="@+id/custom_dialog_frame_inner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:onClick="screenLock"
+                android:orientation="vertical">
+                <!-- Message -->
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:scrollbars="none">
+
+                    <TextView
+                        android:id="@+id/custom_dialog_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="sans-serif-condensed"
+                        android:singleLine="false"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+                </ScrollView>
+                <!-- Switch to turn on or off
+                songs rescan request on each start,
+                shown only in requestSongsRescan method -->
+                <Switch
+                    android:id="@+id/custom_dialog_songs_rescan_request_on_start_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:singleLine="false"
+                    android:text="@string/custom_dialog_songs_rescan_request_on_start_check_text"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+                <!-- EditText for new user playlist name with hint,
+                 shown only in ADD_NEW_USER_PLAYLIST_NAME -->
+                <EditText
+                    android:id="@+id/custom_dialog_new_user_playlist_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="@string/add_new_user_playlist_alert_dialog_hint"
+                    android:imeOptions="actionGo"
+                    android:inputType="text"
+                    android:textCursorDrawable="@null"
+                    android:textSize="16sp"
+                    android:visibility="gone">
+
+                    <requestFocus />
+                </EditText>
+                <!-- Buttons -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp">
+                    <!-- Cancel button -->
+                    <Button
+                        android:id="@+id/custom_dialog_cancel_button"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:text="@string/custom_dialog_cancel_button_text"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+                    <!-- Space -->
+                    <Space
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent" />
+                    <!-- Confirm button -->
+                    <Button
+                        android:id="@+id/custom_dialog_confirm_button"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:text="@string/custom_dialog_confirm_button_text"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- Custom Toast (just a layout, neither Toast nor Dialog class child) -->
+    <RelativeLayout
+        android:id="@+id/custom_toast"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:visibility="gone">
+        <!-- Shadow -->
+        <ImageView
+            android:id="@+id/custom_toast_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5" />
+        <!-- Info frame -->
+        <RelativeLayout
+            android:id="@+id/custom_toast_frame_outer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="32dp"
+            android:onClick="screenLock"
+            android:padding="4dp">
+            <!-- Inner frame with all content -->
+            <LinearLayout
+                android:id="@+id/custom_toast_frame_inner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:onClick="screenLock"
+                android:orientation="vertical">
+                <!-- Message -->
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:scrollbars="none">
+
+                    <TextView
+                        android:id="@+id/custom_toast_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="sans-serif-condensed"
+                        android:singleLine="false"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+                </ScrollView>
+                <!-- Button to close -->
+                <Button
+                    android:id="@+id/custom_toast_close_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:text="@string/custom_toast_close_button_text"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- Loading screen,
+    shown while loadAudio() and applyTheme() (if it was launched from Preferences menu) -->
+    <RelativeLayout
+        android:id="@+id/loading_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:onClick="screenLock"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <!-- #GEM icon, rotation-animated all the time, when loading screen is shown -->
+        <ImageView
+            android:id="@+id/loading_screen_icon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/preferences_button" />
+        <!-- Please wait text -->
+        <TextView
+            android:id="@+id/loading_screen_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/loading_screen_icon"
+            android:layout_centerInParent="true"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:textSize="32sp" />
+    </RelativeLayout>
+</RelativeLayout>

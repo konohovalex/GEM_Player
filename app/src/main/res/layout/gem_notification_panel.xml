@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notification"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="NestedWeights, ContentDescription">
+    <!-- Cover -->
+    <ImageView
+        android:id="@+id/notification_cover"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_centerVertical="true"
+        android:padding="4dp" />
+    <!-- Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/notification_cover"
+        android:orientation="vertical"
+        android:padding="4dp">
+        <!-- Song title -->
+        <TextView
+            android:id="@+id/notification_song_title"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-condensed"
+            android:lines="1"
+            android:textSize="16sp" />
+        <!-- Song artist -->
+        <TextView
+            android:id="@+id/notification_song_artist"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-condensed"
+            android:lines="1"
+            android:textSize="16sp" />
+        <!-- Song album -->
+        <TextView
+            android:id="@+id/notification_song_album"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-condensed"
+            android:lines="1"
+            android:textSize="16sp" />
+        <!--Playback controls container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:orientation="horizontal">
+            <!-- Previous song button -->
+            <ImageView
+                android:id="@+id/notification_previous_song_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent" />
+            <!-- Play/pause song button -->
+            <ImageView
+                android:id="@+id/notification_play_pause_song_button_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent" />
+            <!-- Next song button -->
+            <ImageView
+                android:id="@+id/notification_next_song_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

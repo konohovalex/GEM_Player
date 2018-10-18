@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_dark_material_light">#f2000000</color>
+    <color name="accent_material_light">#ffffff</color>
+
+    <color name="amethyst1">#aa00ff</color>
+    <color name="amethyst2">#f3e5f5</color>
+    <color name="amethystSeekbar">#ea80fc</color>
+
+    <color name="blackDiamond1">#000000</color>
+    <color name="blackDiamond2">#ffffff</color>
+    <color name="blackDiamondSeekbar">#777777</color>
+
+    <color name="citrine1">#ffd600</color>
+    <color name="citrine2">#fffde7</color>
+    <color name="citrineSeekbar">#ffee58</color>
+
+    <color name="emerald1">#00c853</color>
+    <color name="emerald2">#e8f5e9</color>
+    <color name="emeraldSeekbar">#00e676</color>
+
+    <color name="fireOpal1">#ff6d00</color>
+    <color name="fireOpal2">#fff3e0</color>
+    <color name="fireOpalSeekbar">#ffd180</color>
+
+    <color name="ruby1">#c51162</color>
+    <color name="ruby2">#fce4ec</color>
+    <color name="rubySeekbar">#ff4081</color>
+
+    <color name="sapphire1">#2962ff</color>
+    <color name="sapphire2">#e3f2fd</color>
+    <color name="sapphireSeekbar">#82b1ff</color>
+
+    <color name="topaz1">#00b8d4</color>
+    <color name="topaz2">#e0f7fa</color>
+    <color name="topazSeekbar">#00e5ff</color>
+</resources>

@@ -2,7 +2,7 @@
 Audio player for Android
 
 
-![alt text](Screenshot_20181018-105945.png)
+![](screenshot_player_screen.png)
 
 
-![alt text](Screenshot_20181018-111708.png)
+![](screenshot_main_menu.png)

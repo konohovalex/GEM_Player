@@ -6092,6 +6092,9 @@ public class GemPlayer extends AppCompatActivity {
                         if (gemMediaPlayerIsPrepared) {
                             gemMediaPlayer.seekTo(
                                     (int) (progress / 100 * currentlyPlayingSongDuration));
+                            if (!isPlaying) {
+                                timer.setText(returnTimeIn_HH_MM_SS(1));
+                            }
                         }
                         else {
                             gemMediaPlayer.playMedia();
